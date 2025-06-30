@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOIN US - myts FANCLUB MEMBERSHIP</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700&family=Noto+Sans+JP:wght@300;400;700;900&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+    
+<style>
+
+:root {
+    --bg-color: #0A0A0A;
+    --text-color: #F0F0F0;
+    --accent-color-live: #FF4500;
+    --accent-color-special: #9400D3;
+    --card-bg: #1A1A1A;
+    --card-bg-hover: #252525;
+    --gradient-primary: linear-gradient(135deg, #FF4500, #9400D3);
+    --gradient-secondary: linear-gradient(135deg, #1A1A1A, #2C2C2C);
+
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Noto Sans JP', sans-serif;
+    --font-accent: 'Roboto Condensed', sans-serif;
+}
+
+* {
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* ヘッダー */
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 20px;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 69, 0, 0.1);
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.back-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-color);
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: rgba(255, 69, 0, 0.2);
+    border-color: var(--accent-color-live);
+}
+
+/* ヒーローセクション */
+.hero-section {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background: radial-gradient(ellipse at center, rgba(255, 69, 0, 0.1) 0%, rgba(10, 10, 10, 1) 70%);
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 800px;
+    padding: 0 20px;
+}
+
+.hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(3rem, 8vw, 8rem);
+    font-weight: 700;
+    margin-bottom: 20px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 50px rgba(255, 69, 0, 0.3);
+}
+
+.hero-subtitle {
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    margin-bottom: 30px;
+    color: rgba(240, 240, 240, 0.8);
+    font-weight: 300;
+}
+
+.hero-description {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+    color: rgba(240, 240, 240, 0.7);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-primary {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(255, 69, 0, 0.4);
+}
+
+/* プラン比較セクション */
+.plans-section {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: rgba(240, 240, 240, 0.7);
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.plans-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-bottom: 80px;
+}
+
+.plan-card {
+    background: var(--card-bg);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px 30px;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.plan-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.plan-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255, 69, 0, 0.5);
+    background: var(--card-bg-hover);
+}
+
+.plan-card:hover::before {
+    opacity: 1;
+}
+
+.plan-popular {
+    border-color: var(--accent-color-live);
+    background: linear-gradient(135deg, rgba(255, 69, 0, 0.1), rgba(148, 0, 211, 0.1));
+    transform: scale(1.05);
+}
+
+.plan-popular::before {
+    opacity: 1;
+}
+
+.plan-badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: var(--gradient-primary);
+    color: white;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    font-family: var(--font-accent);
+}
+
+.plan-name {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+.plan-price {
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 5px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.plan-period {
+    color: rgba(240, 240, 240, 0.6);
+    margin-bottom: 30px;
+    font-size: 1rem;
+}
+
+.plan-features {
+    list-style: none;
+    margin-bottom: 40px;
+}
+
+.plan-features li {
+    padding: 10px 0;
+    position: relative;
+    padding-left: 30px;
+    color: rgba(240, 240, 240, 0.8);
+}
+
+.plan-features li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--accent-color-live);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.plan-cta {
+    width: 100%;
+    background: transparent;
+    border: 2px solid var(--accent-color-live);
+    color: var(--accent-color-live);
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.plan-cta:hover, .plan-popular .plan-cta {
+    background: var(--gradient-primary);
+    color: white;
+    border-color: transparent;
+}
+
+/* 特典セクション */
+.benefits-section {
+    background: var(--gradient-secondary);
+    padding: 100px 20px;
+}
+
+.benefits-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 60px;
+}
+
+.benefit-card {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-5px);
+}
+
+.benefit-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.benefit-title {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.benefit-description {
+    color: rgba(240, 240, 240, 0.7);
+    line-height: 1.6;
+}
+
+/* FAQセクション */
+.faq-section {
+    padding: 100px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.faq-question {
+    padding: 25px 30px;
+    background: rgba(255, 255, 255, 0.02);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.faq-question:hover {
+    background: rgba(255, 69, 0, 0.1);
+}
+
+.faq-answer {
+    padding: 0 30px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+    color: rgba(240, 240, 240, 0.8);
+    line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 200px;
+    padding: 25px 30px;
+}
+
+.faq-icon {
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(180deg);
+}
+
+/* CTA セクション */
+.final-cta {
+    background: var(--gradient-primary);
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.cta-content {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cta-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: 20px;
+    color: white;
+}
+
+.cta-description {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.cta-secondary {
+    background: white;
+    color: var(--accent-color-live);
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 20px;
+}
+
+.cta-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* フッター */
+.footer {
+    background: var(--bg-color);
+    padding: 40px 20px;
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-text {
+    color: rgba(240, 240, 240, 0.5);
+    font-size: 0.9rem;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .plan-popular {
+        transform: none;
+    }
+    
+    .benefits-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .final-cta div {
+        flex-direction: column !important;
+        gap: 15px !important;
+    }
+    
+    .cta-secondary, .cta-primary {
+        margin: 0;
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* スクロールインジケーター */
+.scroll-indicator {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: var(--gradient-primary);
+    z-index: 1001;
+    transition: width 0.3s ease;
+}
+
+</style>
+
+</head>
+<body>
+
+    <div class="scroll-indicator" id="scrollIndicator"></div>
+
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">myts</div>
+            <button class="back-btn" onclick="window.open('myts.html', '_blank')">← BACK TO MAIN</button>
+        </nav>
+    </header>
+
+    <section class="hero-section">
+        <div class="hero-content fade-in">
+            <h1 class="hero-title">JOIN US</h1>
+            <p class="hero-subtitle">EXCLUSIVE MEMBERSHIP</p>
+            <p class="hero-description">
+                mytsの世界により深く参加しませんか？<br>
+                オンラインイベントの先行参加、個展の特別鑑賞、限定写真コンテンツなど、<br>
+                ファンクラブメンバーだけの特別な体験をお届けします。
+            </p>
+            <button class="cta-primary" onclick="scrollToPlans()">
+                メンバーシップを選ぶ
+            </button>
+        </div>
+    </section>
+
+    <section class="plans-section" id="plans">
+        <h2 class="section-title">MEMBERSHIP PLANS</h2>
+        <p class="section-subtitle">
+            あなたのライフスタイルに合わせて選べる3つのプラン
+        </p>
+
+        <div class="plans-grid">
+            <!-- BASIC PLAN -->
+            <div class="plan-card">
+                <h3 class="plan-name">BASIC</h3>
+                <div class="plan-price">¥500</div>
+                <div class="plan-period">/ 月</div>
+                <ul class="plan-features">
+                    <li>月次ニュースレター</li>
+                    <li>限定写真・動画アクセス</li>
+                    <li>コミュニティ掲示板参加</li>
+                    <li>デジタルフォトカードガチャ（月5回）</li>
+                    <li>Q&A投稿権</li>
+                    <li>配信の通知優先受信</li>
+                </ul>
+                <button class="plan-cta">BASICに登録</button>
+            </div>
+
+            <!-- PREMIUM PLAN -->
+            <div class="plan-card plan-popular">
+                <div class="plan-badge">POPULAR</div>
+                <h3 class="plan-name">PREMIUM</h3>
+                <div class="plan-price">¥1,200</div>
+                <div class="plan-period">/ 月</div>
+                <ul class="plan-features">
+                    <li>BASIC特典すべて</li>
+                    <li>オンラインイベント先行予約</li>
+                    <li>限定グッズ割引（10%OFF）</li>
+                    <li>月1回限定配信視聴権</li>
+                    <li>デジタルフォトカードガチャ（月15回）</li>
+                    <li>個展・写真展の割引入場</li>
+                    <li>バースデーメッセージ動画</li>
+                </ul>
+                <button class="plan-cta">PREMIUMに登録</button>
+            </div>
+
+            <!-- VIP PLAN -->
+            <div class="plan-card">
+                <h3 class="plan-name">VIP</h3>
+                <div class="plan-price">¥3,000</div>
+                <div class="plan-period">/ 月</div>
+                <ul class="plan-features">
+                    <li>PREMIUM特典すべて</li>
+                    <li>年2回プライベートオンライン会</li>
+                    <li>限定グッズ割引（20%OFF）</li>
+                    <li>個別メッセージ送信権（月1回）</li>
+                    <li>デジタルフォトカードガチャ（無制限）</li>
+                    <li>サイン入りグッズ抽選</li>
+                    <li>VIP専用配信コンテンツ</li>
+                    <li>個展プライベート鑑賞会招待</li>
+                </ul>
+                <button class="plan-cta">VIPに登録</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="benefits-section">
+        <div class="benefits-container">
+            <h2 class="section-title">MEMBER BENEFITS</h2>
+            <p class="section-subtitle">
+                メンバーだけが体験できる特別な特典
+            </p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🎥</div>
+                    <h3 class="benefit-title">オンライン特典</h3>
+                    <p class="benefit-description">
+                        ファンミーティングの先行予約権や限定配信の視聴権など、オンラインならではの特典。
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📸</div>
+                    <h3 class="benefit-title">限定コンテンツ</h3>
+                    <p class="benefit-description">
+                        メンバーだけが見られる未公開写真や制作の裏側、個展の準備過程まで。
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">💬</div>
+                    <h3 class="benefit-title">直接交流</h3>
+                    <p class="benefit-description">
+                        コミュニティでファン同士の交流や、mytsとの直接対話の機会も。
+                    </p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🏛️</div>
+                    <h3 class="benefit-title">個展特典</h3>
+                    <p class="benefit-description">
+                        個展の割引入場やプライベート鑑賞会など、アート活動を間近で体験。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section">
+        <h2 class="section-title">FAQ</h2>
+        <p class="section-subtitle">よくあるご質問</p>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>会員登録の方法を教えてください</span>
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                プランを選択後、メールアドレスとパスワードを設定するだけで簡単に登録できます。クレジットカードまたはPayPalでの決済に対応しています。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>オンラインイベントの参加方法は？</span>
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                ツイキャス的な配信となります。開催前日にFC会員にアクセス情報をメールでお送りします。スマホ・PC・タブレットから参加可能です。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>個展の割引はどのくらいですか？</span>
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                PREMIUM会員は入場料10%OFF、VIP会員は20%OFFとなります。また、VIP会員は一般公開前のプライベート鑑賞会にご招待いたします。
+            </div>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>プランの変更はできますか？</span>
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                はい、マイページからいつでもプランの変更が可能です。アップグレードは即座に反映され、ダウングレードは次回更新時に適用されます。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>退会方法を教えてください</span>
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                マイページの設定から「退会」を選択できます。退会後も現在の請求期間終了まではサービスをご利用いただけます。
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                <span>デジタルフォトカードとは何ですか？</span>
+                <span class="faq-icon">▼</span>
+            </div>
+            <div class="faq-answer">
+                mytsのオリジナル写真をデジタルカード化したコレクションアイテムです。ガチャで入手でき、レアカードには特別な加工や未公開写真が使用されています。
+            </div>
+        </div>
+    </section>
+
+    <section class="final-cta">
+        <div class="cta-content">
+            <h2 class="cta-title">今すぐ参加しよう</h2>
+            <p class="cta-description">
+                特別な体験があなたを待っています。<br>
+                mytsコミュニティの一員になりませんか？
+            </p>
+            <div style="display: flex; gap: 20px; justify-content: center; align-items: center; flex-wrap: wrap;">
+                <button class="cta-secondary" onclick="scrollToPlans()">プランを選ぶ</button>
+                <button class="cta-primary">今すぐ登録</button>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p class="footer-text">
+            &copy; 2025 myts unofficial fanclub. All rights reserved.
+        </p>
+    </footer>
+
+<script>
+// スクロールインジケーター
+window.addEventListener('scroll', function() {
+    const scrolled = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
+    document.getElementById('scrollIndicator').style.width = scrolled + '%';
+});
+
+// プランセクションへのスムーススクロール
+function scrollToPlans() {
+    document.getElementById('plans').scrollIntoView({
+        behavior: 'smooth'
+    });
+}
+
+// FAQ切り替え
+function toggleFAQ(element) {
+    const faqItem = element.parentElement;
+    const isActive = faqItem.classList.contains('active');
+    
+    // 他のFAQを閉じる
+    document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // クリックされたFAQを開く/閉じる
+    if (!isActive) {
+        faqItem.classList.add('active');
+    }
+}
+
+// フェードインアニメーション
+function animateOnScroll() {
+    const elements = document.querySelectorAll('.plan-card, .benefit-card, .faq-item');
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+            element.classList.add('fade-in');
+        }
+    });
+}
+
+window.addEventListener('scroll', animateOnScroll);
+animateOnScroll(); // 初回実行
+
+// プラン選択時のアニメーション
+document.querySelectorAll('.plan-cta').forEach(button => {
+    button.addEventListener('click', function() {
+        this.innerHTML = '処理中...';
+        this.style.background = 'var(--gradient-primary)';
+        this.style.color = 'white';
+        this.style.border = 'none';
+        
+        setTimeout(() => {
+            alert('登録ページへリダイレクトします！');
+            this.innerHTML = '登録する';
+        }, 1500);
+    });
+});
+
+// パーティクルエフェクト（オプション）
+function createParticles() {
+    const hero = document.querySelector('.hero-section');
+    
+    for (let i = 0; i < 50; i++) {
+        const particle = document.createElement('div');
+        particle.style.position = 'absolute';
+        particle.style.width = '2px';
+        particle.style.height = '2px';
+        particle.style.background = 'rgba(255, 69, 0, 0.5)';
+        particle.style.borderRadius = '50%';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animation = `float ${3 + Math.random() * 4}s ease-in-out infinite`;
+        particle.style.animationDelay = Math.random() * 4 + 's';
+        
+        hero.appendChild(particle);
+    }
+}
+
+// CSSアニメーションを追加
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes float {
+        0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.5; }
+        50% { transform: translateY(-20px) rotate(180deg); opacity: 1; }
+    }
+`;
+document.head.appendChild(style);
+
+// パーティクル生成
+createParticles();
+</script>
+
+</body>
+</html>

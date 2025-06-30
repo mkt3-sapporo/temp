@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>myts - CORE & COMMUNITY</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@700&family=Noto+Sans+JP:wght@400;700&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+    
+<style>
+
+/* --- 基本設定とフォント --- */
+:root {
+    --bg-color: #1A1A1A;
+    --text-color: #F0F0F0;
+    --accent-color-live: #FF4500;
+    --accent-color-special: #9400D3;
+    --grid-item-bg: #2C2C2C;
+    --gradient-primary: linear-gradient(135deg, #FF4500, #9400D3);
+    --font-heading: 'Cormorant Garamond', serif;
+    --font-body: 'Noto Sans JP', sans-serif;
+    --font-ticker: 'Roboto Condensed', sans-serif;
+}
+
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    line-height: 1.6;
+}
+
+a { color: inherit; text-decoration: none; }
+
+/* --- ヘッダー --- */
+.site-header {
+    position: fixed; top: 0; width: 100%; display: flex;
+    justify-content: space-between; align-items: center;
+    padding: 15px 20px; z-index: 10000; 
+}
+
+.site-logo { 
+    font-family: var(--font-heading); 
+    font-size: 2rem; 
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.menu-icon { 
+    width: 30px; 
+    height: 20px; 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+    cursor: pointer; 
+}
+
+.menu-icon .bar { 
+    width: 100%; 
+    height: 2px; 
+    background-color: var(--text-color); 
+    transition: all 0.3s ease; 
+}
+/* --- ヒーローセクション --- */
+.hero { height: 100vh; position: relative; display: flex; justify-content: center; align-items: center; overflow: hidden; }
+.hero-image { 
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
+    background: linear-gradient(45deg, #1A1A1A, #2C2C2C, #1A1A1A);
+    filter: brightness(0.7); 
+}
+.hero-title { 
+    font-family: var(--font-heading); 
+    font-size: clamp(3rem, 18vw, 10rem); 
+    font-weight: 700; 
+    color: var(--text-color); 
+    text-align: center; 
+    line-height: 1.1; 
+    z-index: 10; 
+    mix-blend-mode: screen;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* --- ティッカー --- */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background-color: var(--accent-color-live);
+    color: var(--bg-color);
+    padding: 10px 0;
+    font-family: var(--font-ticker);
+    font-weight: 700;
+}
+.ticker {
+    display: inline-block;
+    white-space: nowrap;
+    animation: ticker-scroll 40s linear infinite;
+}
+@keyframes ticker-scroll {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
+.ticker span {
+    padding-right: 30px;color:#eee;
+}
+
+/* --- コンテンツグリッド --- */
+.contents-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 20px 10px;
+}
+.grid-item {
+    background-color: var(--grid-item-bg);
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    border: 1px solid #444;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+.grid-item:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 10px 25px rgba(255, 69, 0, 0.2);
+}
+.grid-item h2 { font-family: var(--font-heading); font-size: 2rem; margin-bottom: 8px; }
+.grid-item p { font-size: 0.8rem; color: #b0b0b0; }
+
+/* --- グリッドアイテム個別スタイル --- */
+.item-ticket {
+    grid-column: 1 / 3;
+    background: linear-gradient(135deg, var(--accent-color-live), #FF6B47);
+    color: white;
+    min-height: 180px;
+    border-color: var(--accent-color-live);
+}
+.item-ticket::before {
+    opacity: 1;
+}
+.item-ticket h2 { 
+    font-size: 2.8rem; 
+    color: white;
+}
+.item-ticket p { 
+    color: rgba(255, 255, 255, 0.9); 
+    font-weight: bold; 
+}
+
+.item-news {
+    background: linear-gradient(135deg, var(--card-bg), #2A2A2A);
+}
+
+.item-gallery {
+    background: linear-gradient(135deg, var(--card-bg), #2A2A2A);
+}
+
+.item-community {
+    background: linear-gradient(135deg, var(--card-bg), #2A2A2A);
+}
+
+.item-special {
+    background: linear-gradient(135deg, var(--accent-color-special), #B347D9);
+    color: white;
+    border-color: var(--accent-color-special);
+}
+.item-special::before {
+    opacity: 1;
+}
+.item-special h2 {
+    color: white;
+}
+.item-special p { 
+    color: rgba(255, 255, 255, 0.9); 
+}
+
+.item-join {
+    grid-column: 1 / 3;
+    text-align: center;
+    justify-content: center;
+    background: var(--gradient-primary);
+    color: white;
+    min-height: 180px;
+    position: relative;
+    border-color: transparent;
+}
+.item-join::before {
+    opacity: 1;
+}
+.item-join h2 { 
+    font-size: 2.8rem; 
+    color: white;
+}
+.item-join p { 
+    color: rgba(255, 255, 255, 0.9); 
+    font-weight: bold; 
+}
+
+/* --- モーダル/ポップアップスタイル --- */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    background: var(--card-bg);
+    margin: 5% auto;
+    padding: 40px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 700px;
+    max-height: 80vh;
+    overflow-y: auto;
+    position: relative;
+    border: 2px solid rgba(255, 69, 0, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+.close {
+    color: rgba(240, 240, 240, 0.6);
+    float: right;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    transition: color 0.3s ease;
+}
+.close:hover { 
+    color: var(--accent-color-live); 
+}
+
+.modal h2 {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    margin-bottom: 25px;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.modal h3 {
+    font-family: var(--font-heading);
+    font-size: 1.8rem;
+    margin: 25px 0 15px 0;
+    color: var(--text-color);
+}
+
+.modal p {
+    margin-bottom: 18px;
+    color: rgba(240, 240, 240, 0.8);
+    line-height: 1.7;
+}
+
+.modal ul {
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+.modal li {
+    margin-bottom: 10px;
+    color: rgba(240, 240, 240, 0.8);
+    line-height: 1.6;
+}
+
+.news-item {
+    border-bottom: 1px solid #444;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-date {
+    color: var(--accent-color-live);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.gallery-item {
+    aspect-ratio: 1;
+    background: linear-gradient(45deg, #333, #555);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #888;
+    transition: transform 0.3s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.community-post {
+    background: #333;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 3px solid var(--accent-color-live);
+}
+
+.post-author {
+    color: var(--accent-color-live);
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.post-time {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.btn {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 1rem;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(255, 69, 0, 0.4);
+}
+
+/* --- フッター --- */
+.site-footer { 
+    text-align: center; 
+    padding: 50px 20px; 
+    font-size: 0.9rem; 
+    color: rgba(240, 240, 240, 0.5); 
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 60px;
+    background: var(--gradient-secondary);
+}
+
+/* アニメーション */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .contents-grid {
+        grid-template-columns: 1fr;
+        padding: 30px 15px;
+        gap: 15px;
+max-width: 1200px; 
+    }
+    
+    .grid-item {
+        min-height: 120px;
+        padding: 25px;
+    }
+    
+    .item-ticket, .item-join {
+        min-height: 150px;
+    }
+    
+    .modal-content {
+        padding: 30px 25px;
+        margin: 10% auto;
+    }
+}
+
+.cta-primary {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(255, 69, 0, 0.3);
+}
+
+.cta-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(255, 69, 0, 0.5);
+    filter: brightness(1.1);
+}
+
+.cta-secondary {
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--accent-color-live);
+    padding: 18px 40px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 20px;
+}
+
+.cta-secondary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 35px rgba(255, 255, 255, 0.2);
+    background: white;
+    border-color: white;
+}
+
+
+</style>
+
+</head>
+<body>
+
+  <header class="site-header">
+    <nav class="nav">
+        <div class="site-logo">myts</div>
+        <div class="menu-icon">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+</header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-image"></div>
+            <h1 class="hero-title">myts no <br> Otaku</h1>
+        </section>
+
+        <div class="ticker-wrap">
+            <div class="ticker">
+                <span>【EVENT INFO】 8月5日(土) オンラインファンミーティング開催決定！FC先行予約は7/20から...</span>
+                <span>【EXHIBITION】 個展「myts -未定-」9月札幌開催 限定グッズ&写真集発売予定...</span>
+                <span>【COMMUNITY】 新規投稿: 「配信ありがとうございました！」 by ファン123</span>
+                <span>【SPECIAL】 デジタルガチャ新アイテム追加！レアフォトカード確率アップ中</span>
+            </div>
+        </div>
+
+        <section class="contents-grid">
+            <div class="grid-item item-ticket" onclick="openModal('eventModal')">
+                <h2>EVENT</h2>
+                <p>オンラインファンミーティング情報</p>
+            </div>
+
+            <div class="grid-item item-news" onclick="openModal('newsModal')">
+                <h2>NEWS</h2>
+                <p>最新情報をチェック</p>
+            </div>
+
+            <div class="grid-item item-gallery" onclick="openModal('exhibitionModal')">
+                <h2>EXHIBITION</h2>
+                <p>個展・作品展示情報</p>
+            </div>
+            
+            <div class="grid-item item-community" onclick="openModal('communityModal')">
+                <h2>COMMUNITY</h2>
+                <p>会員限定BBS</p>
+            </div>
+            
+            <div class="grid-item item-special" onclick="openModal('specialModal')">
+                <h2>SPECIAL</h2>
+                <p>DIGITAL GACHA / Q&A</p>
+            </div>
+
+            <div class="grid-item item-join" onclick="window.open('lp.html', '_blank')">
+                <h2>JOIN US</h2>
+                <p>メンバーシッププラン詳細</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- モーダル: イベント -->
+    <div id="eventModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>EVENT INFO</h2>
+            <h3>オンラインファンミーティング 2025</h3>
+            <p><strong>開催日時:</strong> 2025年8月5日(土) 19:00〜21:00</p>
+            <p><strong>参加方法:</strong> Zoom配信（FC会員限定）</p>
+            <p><strong>FC先行予約:</strong> 7月20日(土) 12:00〜7月27日(土) 23:59</p>
+            
+            <h3>イベント内容</h3>
+            <ul>
+                <li>mytsとのトークセッション</li>
+                <li>ファンからの質問コーナー</li>
+                <li>限定パフォーマンス披露</li>
+                <li>サプライズ企画あり</li>
+                <li>参加者限定デジタル特典配布</li>
+            </ul>
+
+            <h3>参加料金</h3>
+            <p>FC会員: ¥3,000 / 一般: ¥4,500</p>
+            <p>※アーカイブ視聴権込み（1週間限定）</p>
+
+            <h3>今後の予定</h3>
+            <ul>
+                <li>9月15日 (日) 個展関連トークイベント</li>
+                <li>10月中旬 ハロウィン特別配信</li>
+                <li>12月24日 (火) クリスマス特別ファンミーティング</li>
+            </ul>
+
+            <button class="btn">参加申込みページへ</button>
+        </div>
+    </div>
+
+    <!-- モーダル: ニュース -->
+    <div id="newsModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>NEWS</h2>
+            
+            <div class="news-item">
+                <div class="news-date">2025.06.30</div>
+                <h3>個展「myts -未定-」開催決定！</h3>
+                <p>9月に札幌で個展を開催します。mytsが撮影した写真作品や未公開ショットを展示予定です。</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">2025.06.28</div>
+                <h3>8月オンラインファンミーティング開催</h3>
+                <p>8月5日にZoomでのオンラインファンミーティングを開催。限定パフォーマンスやQ&Aセッションを予定しています。</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">2025.06.25</div>
+                <h3>新グッズ発売開始</h3>
+                <p>オリジナルフォトブックとアクリルスタンドの販売を開始しました。個展開催記念の限定デザインです。</p>
+            </div>
+
+            <div class="news-item">
+                <div class="news-date">2025.06.20</div>
+                <h3>ツイキャス配信</h3>
+                <p>日常の様子や制作過程を配信する専用チャンネルを開設しました。毎週金曜日に新動画を投稿予定です。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- モーダル: 個展 -->
+    <div id="exhibitionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>EXHIBITION</h2>
+            <h3>個展「myts -未定-」</h3>
+            <p><strong>開催期間:</strong> 2025年9月10日(火)〜9月30日(月)</p>
+            <p><strong>会場:</strong> 会場未定"</p>
+            <p><strong>開館時間:</strong> 10:00〜20:00（最終日は18:00まで）</p>
+            
+            <h3>展示内容</h3>
+            <ul>
+                <li>mytsが撮影したオリジナル写真作品</li>
+                <li>アイドル活動の軌跡を辿る写真展示</li>
+                <li>未公開プライベート写真</li>
+                <li>ファンからの応援メッセージ展示</li>
+                <li>インタラクティブ映像インスタレーション</li>
+            </ul>
+
+            <h3>入場料金</h3>
+            <p>一般: ¥1,500 / FC会員: ¥1,200 / 学生: ¥800</p>
+            <p>※図録（写真集）付きチケット: +¥2,000</p>
+
+            <h3>特別企画</h3>
+            <ul>
+                <li>9月15日(日) myts本人ギャラリートーク</li>
+                <li>限定グッズ販売（会場でのみ購入可能）</li>
+                <li>来場者特典：オリジナルポストカード配布</li>
+                <li>FC会員限定：サイン会抽選参加権</li>
+            </ul>
+
+            <div class="gallery-grid">
+                <div class="gallery-item">作品プレビュー1</div>
+                <div class="gallery-item">作品プレビュー2</div>
+                <div class="gallery-item">作品プレビュー3</div>
+                <div class="gallery-item">作品プレビュー4</div>
+            </div>
+
+            <button class="btn">チケット予約</button>
+        </div>
+    </div>
+
+    <!-- モーダル: コミュニティ -->
+    <div id="communityModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>COMMUNITY</h2>
+            <p>FC会員限定のコミュニティ掲示板</p>
+
+            <div class="community-post">
+                <div class="post-author">写真好きファン</div>
+                <div class="post-time">2時間前</div>
+                <p>個展のプレビュー見ました！mytsの写真センス本当に素敵✨ 絶対見に行きます📸</p>
+            </div>
+
+            <div class="community-post">
+                <div class="post-author">配信大好き</div>
+                <div class="post-time">5時間前</div>
+                <p>今日の配信ありがとうございました！制作の裏話が聞けて嬉しかったです💕</p>
+            </div>
+
+            <div class="community-post">
+                <div class="post-author">ファンミ参戦組</div>
+                <div class="post-time">1日前</div>
+                <p>オンラインファンミのチケット取れた🎉 質問コーナーで何聞こうか今から考え中です！</p>
+            </div>
+
+            <button class="btn">投稿する</button>
+        </div>
+    </div>
+
+    <!-- モーダル: スペシャル -->
+    <div id="specialModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>SPECIAL</h2>
+            
+            <h3>デジタルガチャ</h3>
+            <p>限定デジタルフォトカードが手に入るガチャシステム。レアカードをコレクションしよう！</p>
+            <p><strong>現在のピックアップ:</strong> 個展記念フォトカード (確率2倍)</p>
+            <button class="btn">ガチャを回す</button>
+
+            <h3>Q&A コーナー</h3>
+            <p>mytsへの質問を募集中！採用された質問は次回のオンライン配信で回答されます。</p>
+            
+            <div class="community-post">
+                <div class="post-author">質問者A</div>
+                <p><strong>Q:</strong> 写真を撮るときに一番大切にしていることは何ですか？</p>
+            </div>
+
+            <div class="community-post">
+                <div class="post-author">質問者B</div>
+                <p><strong>Q:</strong> アイドル活動と写真活動の両立で大変なことはありますか？</p>
+            </div>
+
+            <div class="community-post">
+                <div class="post-author">質問者C</div>
+                <p><strong>Q:</strong> 新しい個展に込めた想いを教えてください</p>
+            </div>
+
+            <button class="btn">質問を投稿</button>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 myts unofficial fanclub. All rights reserved.</p>
+    </footer>
+
+<script>
+// モーダル機能
+function openModal(modalId) {
+    document.getElementById(modalId).style.display = 'block';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+// 全モーダルのクローズボタンにイベント追加
+document.addEventListener('DOMContentLoaded', function() {
+    const closeButtons = document.querySelectorAll('.close');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            this.closest('.modal').style.display = 'none';
+        });
+    });
+
+    // モーダル外クリックで閉じる
+    window.addEventListener('click', function(event) {
+        if (event.target.classList.contains('modal')) {
+            event.target.style.display = 'none';
+        }
+    });
+});
+
+// メニューアイコンのアニメーション
+document.querySelector('.menu-icon').addEventListener('click', function() {
+    const bars = this.querySelectorAll('.bar');
+    bars.forEach(bar => {
+        bar.style.transform = bar.style.transform === 'rotate(45deg)' ? 'rotate(0deg)' : 'rotate(45deg)';
+    });
+});
+</script>
+
+</body>
+</html>
